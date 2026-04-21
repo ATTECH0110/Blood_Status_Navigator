@@ -1,3 +1,4 @@
+import footerBg from "../assets/images/footer-bg.jpg";
 import React from "react";
 import { Link } from "react-router-dom";
 import {
@@ -17,7 +18,7 @@ export default function Footer() {
     <footer className="relative mt-16 sm:mt-20 md:mt-24 border-t border-white/10 bg-slate-950 overflow-hidden">
       
       {/* ================= BACKGROUND IMAGE ================= */}
-      <div className="absolute inset-0 bg-[url('/images/footer-bg.jpg')] bg-cover bg-center opacity-45"></div>
+      <div style ={{backgroundImage:`url(${footerBg})`,backgroundSize:"cover",backgroundPosition:"centre"}} className="absolute inset-0  opacity-45"></div>
 <div className="absolute inset-0 bg-gradient-to-br from-slate-950/70 via-slate-950/60 to-black/75"></div>
       {/* Background Glow */}
       <div className="absolute top-0 left-0 w-52 h-52 sm:w-72 sm:h-72 bg-red-500/10 blur-3xl rounded-full -z-10"></div>

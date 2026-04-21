@@ -1,3 +1,4 @@
+import contactBg from "../assets/images/contact-bg.jpg";
 import React from "react";
 
 export default function Contact() {
@@ -5,7 +6,7 @@ export default function Contact() {
     <div className="w-full text-white relative overflow-hidden bg-slate-950 pb-0">
       
       {/* ================= BACKGROUND IMAGE ================= */}
-      <div className="absolute inset-0 bg-[url('/images/contact-bg.jpg')] bg-cover bg-center opacity-40"></div>
+      <div style ={{backgroundImage:`url(${contactBg})`,backgroundSize:"cover",backgroundPosition:"centre"}} className="absolute inset-0  opacity-40"></div>
       <div className="absolute inset-0 bg-slate-950/70"></div>
 
       <div className="relative z-10">

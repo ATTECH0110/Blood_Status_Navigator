@@ -1,3 +1,9 @@
+import chandanImg from "../assets/images/chandan.jpg";
+import abhinavImg from "../assets/images/abhinav.jpg";
+import nirmalImg from "../assets/images/nirmal.jpg";
+import priyanshuImg from "../assets/images/priyanshu.jpg";
+import riteshImg from "../assets/images/ritesh.jpg";
+import aboutBg from "../assets/images/about-bg.jpg"
 import React from "react";
 import { FaLinkedinIn, FaInstagram } from "react-icons/fa";
 
@@ -6,7 +12,7 @@ export default function About() {
     <div className="w-full min-h-screen text-white relative overflow-hidden bg-slate-950">
 
       {/* GLOBAL BACKGROUND OVERLAY */}
-      <div className="absolute inset-0 bg-[url('/images/about-bg.jpg')] bg-cover bg-center opacity-35"></div>
+      <div style ={{backgroundImage:`url(${aboutBg})`,backgroundSize:"cover",backgroundPosition:"centre"}}className="absolute inset-0  opacity-35"></div>
       <div className="absolute inset-0 bg-slate-950/65"></div>
 
       <div className="relative z-10">
@@ -94,7 +100,7 @@ export default function About() {
             <TeamCard
               name="Chandan Singh"
               role="Full Stack Developer"
-              img="./images/chandan.jpg"
+              img={chandanImg}
               linkedin="https://www.linkedin.com/in/chandan-singh-5a4007330"
               instagram="https://www.instagram.com/chandan_0110_a_t_singh?igsh=MXRyNWFrbnEzMnZyaA=="
             />
@@ -102,7 +108,7 @@ export default function About() {
             <TeamCard
               name="Priyanshu Verma"
               role="Backend Developer"
-              img="./images/priyanshu.jpg"
+              img={priyanshuImg}
               linkedin="www.linkedin.com/in/priyanshu-verma-557582289"
               instagram="https://www.instagram.com/satyam_kv_3274?igsh=MWhhaDFzaGh3Y2N5dQ=="
             />
@@ -110,7 +116,7 @@ export default function About() {
             <TeamCard
               name="Nirmal Maurya"
               role="Frontend Developer"
-              img="./images/nirmal.jpg"
+              img={nirmalImg}
               linkedin="https://www.linkedin.com/in/nirmal-maurya/"
               instagram="https://www.instagram.com/nirml_maurya/"
             />
@@ -118,7 +124,7 @@ export default function About() {
             <TeamCard
               name="Ritesh Kushwaha"
               role="Database Engineer"
-              img="public/images/ritesh.jpg"
+              img={riteshImg}
               linkedin="https://www.linkedin.com/in/ritesh-kushwaha-a3a369360?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
               instagram="/"
             />
@@ -126,7 +132,7 @@ export default function About() {
             <TeamCard
               name="Abhinav Singh"
               role="UI/UX Designer"
-              img="./images/abhinav.jpg"
+              img={abhinavImg}
               linkedin="https://www.linkedin.com/in/abhinav-singh-106853373?utm_source=share_via&utm_content=profile&utm_medium=member_android"
               instagram=""
             />
