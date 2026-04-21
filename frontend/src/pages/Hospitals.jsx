@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import API from "../config";   // ✅ ADD THIS
 
 export default function Hospitals() {
   const [hospitals, setHospitals] = useState([]);
@@ -11,12 +12,15 @@ export default function Hospitals() {
   }, []);
 
   const load = async () => {
-    const res = await axios.get("http://localhost:5000/api/hospitals");
+    // ✅ FIXED
+    const res = await axios.get(`${API}/api/hospitals`);
     setHospitals(res.data);
   };
 
   const addHospital = async () => {
-    await axios.post("http://localhost:5000/api/hospitals", { name, address });
+    // ✅ FIXED
+    await axios.post(`${API}/api/hospitals`, { name, address });
+
     setName("");
     setAddress("");
     load();

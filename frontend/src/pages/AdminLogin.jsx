@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import API from "../config";   // ✅ ADD THIS
 
 export default function AdminLogin() {
   const [mode, setMode] = useState("login");
@@ -36,7 +37,8 @@ export default function AdminLogin() {
         payload = { email };
       }
 
-      const res = await axios.post("http://localhost:5000" + url, payload);
+      // ✅ FIXED LINE
+      const res = await axios.post(`${API}${url}`, payload);
 
       alert(res.data.msg || "Success");
 
@@ -54,7 +56,8 @@ export default function AdminLogin() {
 
   const resendOtp = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/resend-otp", {
+      // ✅ FIXED LINE
+      const res = await axios.post(`${API}/api/auth/resend-otp`, {
         email,
       });
       alert(res.data.msg || "OTP resent");
@@ -73,10 +76,8 @@ export default function AdminLogin() {
         backgroundPosition: "center",
       }}
     >
-      {/* Overlay */}
       <div className="absolute inset-0 bg-slate-900/75 backdrop-blur-[2px]" />
 
-      {/* Centered content */}
       <div className="relative z-10 h-full w-full flex items-center justify-center px-4">
         <div className="w-full max-w-[400px] p-6 sm:p-8 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl">
           <h2 className="text-center text-2xl sm:text-3xl font-bold text-white mb-8 tracking-wide">
@@ -86,115 +87,60 @@ export default function AdminLogin() {
             {mode === "verify" && "Verify OTP"}
           </h2>
 
-          {/* SIGNUP EXTRA FIELDS */}
           {mode === "signup" && (
             <>
-              <input
-                placeholder="Full Name"
-                value={name}
+              <input placeholder="Full Name" value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full mb-4 px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/70 outline-none border border-white/20 focus:border-red-400"
-              />
+                className="input" />
 
-              <input
-                placeholder="Mobile Number"
-                value={mobile}
+              <input placeholder="Mobile Number" value={mobile}
                 onChange={(e) => setMobile(e.target.value)}
-                className="w-full mb-4 px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/70 outline-none border border-white/20 focus:border-red-400"
-              />
+                className="input" />
 
-              <input
-                placeholder="Age"
-                value={age}
+              <input placeholder="Age" value={age}
                 onChange={(e) => setAge(e.target.value)}
-                className="w-full mb-4 px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/70 outline-none border border-white/20 focus:border-red-400"
-              />
+                className="input" />
             </>
           )}
 
-          {/* EMAIL */}
-          <input
-            className="w-full mb-4 px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/70 outline-none border border-white/20 focus:border-red-400"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <input className="input" placeholder="Email"
+            value={email} onChange={(e) => setEmail(e.target.value)} />
 
-          {/* OTP */}
           {mode === "verify" && (
-            <input
-              className="w-full mb-4 px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/70 outline-none border border-white/20 focus:border-red-400"
-              placeholder="Enter OTP"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-            />
+            <input className="input" placeholder="Enter OTP"
+              value={otp} onChange={(e) => setOtp(e.target.value)} />
           )}
 
-          {/* PASSWORD */}
           {mode !== "forgot" && mode !== "verify" && (
-            <input
-              type="password"
-              className="w-full mb-4 px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/70 outline-none border border-white/20 focus:border-red-400"
+            <input type="password" className="input"
               placeholder="Password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+              onChange={(e) => setPassword(e.target.value)} />
           )}
 
-          {/* BUTTON */}
-          <button
-            onClick={submit}
-            className="w-full mt-4 py-3 rounded-xl font-bold bg-gradient-to-r from-red-500 to-pink-600 hover:scale-[1.02] hover:shadow-red-500/40 transition-all duration-300 text-white shadow-lg"
-          >
+          <button onClick={submit} className="btn">
             {mode === "login" && "Login"}
             {mode === "signup" && "Create Admin"}
             {mode === "forgot" && "Send Reset Link"}
             {mode === "verify" && "Verify OTP"}
           </button>
 
-          {/* LINKS */}
           <div className="text-center mt-6 text-sm">
             {mode === "login" && (
               <>
-                <p
-                  className="text-blue-300 hover:text-white cursor-pointer transition"
-                  onClick={() => setMode("signup")}
-                >
-                  Create new admin
-                </p>
-                <p
-                  className="text-blue-300 hover:text-white cursor-pointer mt-2 transition"
-                  onClick={() => setMode("forgot")}
-                >
-                  Forgot password?
-                </p>
+                <p onClick={() => setMode("signup")}>Create new admin</p>
+                <p onClick={() => setMode("forgot")}>Forgot password?</p>
               </>
             )}
 
             {mode !== "login" && mode !== "verify" && (
-              <p
-                className="text-blue-300 hover:text-white cursor-pointer mt-3 transition"
-                onClick={() => setMode("login")}
-              >
-                Back to login
-              </p>
+              <p onClick={() => setMode("login")}>Back to login</p>
             )}
 
             {mode === "verify" && (
               <>
-                <p
-                  className="text-blue-300 hover:text-white cursor-pointer transition"
-                  onClick={resendOtp}
-                >
-                  Resend OTP
-                </p>
-
-                <p
-                  className="text-blue-300 hover:text-white cursor-pointer mt-2 transition"
-                  onClick={() => setMode("signup")}
-                >
-                  Back to signup
-                </p>
+                <p onClick={resendOtp}>Resend OTP</p>
+                <p onClick={() => setMode("signup")}>Back to signup</p>
               </>
             )}
           </div>
