@@ -94,7 +94,7 @@ export default function About() {
             <TeamCard
               name="Chandan Singh"
               role="Full Stack Developer"
-              img="public/images/chandan.jpg"
+              img="./images/chandan.jpg"
               linkedin="https://www.linkedin.com/in/chandan-singh-5a4007330"
               instagram="https://www.instagram.com/chandan_0110_a_t_singh?igsh=MXRyNWFrbnEzMnZyaA=="
             />
@@ -102,7 +102,7 @@ export default function About() {
             <TeamCard
               name="Priyanshu Verma"
               role="Backend Developer"
-              img="public/images/priyanshu.jpg"
+              img="./images/priyanshu.jpg"
               linkedin="www.linkedin.com/in/priyanshu-verma-557582289"
               instagram="https://www.instagram.com/satyam_kv_3274?igsh=MWhhaDFzaGh3Y2N5dQ=="
             />
@@ -110,7 +110,7 @@ export default function About() {
             <TeamCard
               name="Nirmal Maurya"
               role="Frontend Developer"
-              img="public/images/nirmal.jpg"
+              img="./images/nirmal.jpg"
               linkedin="https://www.linkedin.com/in/nirmal-maurya/"
               instagram="https://www.instagram.com/nirml_maurya/"
             />
@@ -126,7 +126,7 @@ export default function About() {
             <TeamCard
               name="Abhinav Singh"
               role="UI/UX Designer"
-              img="public/images/abhinav.jpg"
+              img="./images/abhinav.jpg"
               linkedin="https://www.linkedin.com/in/abhinav-singh-106853373?utm_source=share_via&utm_content=profile&utm_medium=member_android"
               instagram=""
             />
