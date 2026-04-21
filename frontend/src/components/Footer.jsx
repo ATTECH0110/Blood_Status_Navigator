@@ -139,22 +139,22 @@ export default function Footer() {
 
             <div className="flex items-center justify-center sm:justify-start gap-3 flex-wrap">
               <SocialIcon
-                href="https://facebook.com/yourprofile"
+                href="/"
                 icon={<FaFacebookF />}
                 hover="hover:bg-blue-600"
               />
               <SocialIcon
-                href="https://instagram.com/yourprofile"
+                href="https://www.instagram.com/chandan_0110_a_t_singh?igsh=MXRyNWFrbnEzMnZyaA=="
                 icon={<FaInstagram />}
                 hover="hover:bg-pink-500"
               />
               <SocialIcon
-                href="https://twitter.com/yourprofile"
+                href="https://x.com/acs01108787"
                 icon={<FaTwitter />}
                 hover="hover:bg-sky-500"
               />
               <SocialIcon
-                href="https://linkedin.com/in/yourprofile"
+                href="https://www.linkedin.com/in/chandan-singh-5a4007330"
                 icon={<FaLinkedinIn />}
                 hover="hover:bg-blue-500"
               />

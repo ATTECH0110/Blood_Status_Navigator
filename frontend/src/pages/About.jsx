@@ -94,7 +94,7 @@ export default function About() {
             <TeamCard
               name="Chandan Singh"
               role="Full Stack Developer"
-              img="/images/chandan.jpg"
+              img={import.meta.env.BASE_URL + "/images/chandan.jpg"}
               linkedin="https://www.linkedin.com/in/chandan-singh-5a4007330"
               instagram="https://www.instagram.com/chandan_0110_a_t_singh?igsh=MXRyNWFrbnEzMnZyaA=="
             />
@@ -104,7 +104,7 @@ export default function About() {
               role="Backend Developer"
               img="/images/priyanshu.jpg"
               linkedin="www.linkedin.com/in/priyanshu-verma-557582289"
-              instagram="/"
+              instagram="https://www.instagram.com/satyam_kv_3274?igsh=MWhhaDFzaGh3Y2N5dQ=="
             />
 
             <TeamCard
@@ -128,7 +128,7 @@ export default function About() {
               role="UI/UX Designer"
               img="/images/abhinav.jpg"
               linkedin="https://www.linkedin.com/in/abhinav-singh-106853373?utm_source=share_via&utm_content=profile&utm_medium=member_android"
-              instagram="/"
+              instagram=""
             />
 
           </div>
