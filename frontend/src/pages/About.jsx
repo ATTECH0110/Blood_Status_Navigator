@@ -95,40 +95,40 @@ export default function About() {
               name="Chandan Singh"
               role="Full Stack Developer"
               img="/images/chandan.jpg"
-              linkedin="https://linkedin.com/in/chandan"
-              instagram="https://instagram.com/chandan"
+              linkedin="https://www.linkedin.com/in/chandan-singh-5a4007330"
+              instagram="https://www.instagram.com/chandan_0110_a_t_singh?igsh=MXRyNWFrbnEzMnZyaA=="
             />
 
             <TeamCard
               name="Priyanshu Verma"
               role="Backend Developer"
               img="/images/priyanshu.jpg"
-              linkedin="https://linkedin.com/in/priyanshu"
-              instagram="https://instagram.com/priyanshu"
+              linkedin="www.linkedin.com/in/priyanshu-verma-557582289"
+              instagram="/"
             />
 
             <TeamCard
               name="Nirmal Maurya"
               role="Frontend Developer"
               img="/images/nirmal.jpg"
-              linkedin="https://linkedin.com/in/nirmal"
-              instagram="https://instagram.com/nirmal"
+              linkedin="https://www.linkedin.com/in/nirmal-maurya/"
+              instagram="https://www.instagram.com/nirml_maurya/"
             />
 
             <TeamCard
               name="Ritesh Kushwaha"
               role="Database Engineer"
               img="/images/ritesh.jpg"
-              linkedin="https://linkedin.com/in/ritesh"
-              instagram="https://instagram.com/ritesh"
+              linkedin="https://www.linkedin.com/in/ritesh-kushwaha-a3a369360?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              instagram="/"
             />
 
             <TeamCard
               name="Abhinav Singh"
               role="UI/UX Designer"
               img="/images/abhinav.jpg"
-              linkedin="https://linkedin.com/in/abhinav"
-              instagram="https://instagram.com/in/abhinav"
+              linkedin="https://www.linkedin.com/in/abhinav-singh-106853373?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+              instagram="/"
             />
 
           </div>
