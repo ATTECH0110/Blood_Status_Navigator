@@ -1,7 +1,51 @@
 import contactBg from "../assets/images/contact-bg.jpg";
-import React from "react";
+import React, {useState} from "react";
 
 export default function Contact() {
+
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    message: ""
+  });
+
+  // ✅ SUBMIT FUNCTION
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // 🔥 बहुत जरूरी
+
+    if (!form.name || !form.email || !form.message) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API}/api/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(form)
+      });
+
+      const data = await res.json();
+      console.log(data);
+
+      alert("Message sent successfully ✅");
+
+      // reset
+      setForm({
+        name: "",
+        email: "",
+        message: ""
+      });
+
+    } catch (err) {
+      console.log(err);
+      alert("Server error ❌");
+    }
+  };
+
+
   return (
     <div className="w-full text-white relative overflow-hidden bg-slate-950 pb-0">
       
@@ -39,12 +83,18 @@ export default function Contact() {
               <div className="space-y-5 text-gray-300 text-sm sm:text-base">
                 <div>
                   <p className="font-semibold text-white mb-1">📧 Email</p>
-                  <p className="break-all">support@bloodstatus.com</p>
+                  <a 
+                  href="mailto:cs786123@gmail.com"
+                  className="break-all">
+                    support@bloodstatus.com</a>
                 </div>
 
                 <div>
                   <p className="font-semibold text-white mb-1">📞 Phone</p>
-                  <p>+91 9000000000</p>
+                  <a 
+                  href="tel:7394827627"
+                  className="break-all">
+                    +91 7394827627</a>
                 </div>
 
                 <div>
@@ -60,27 +110,33 @@ export default function Contact() {
                 Send Message
               </h2>
 
-              <form className="space-y-4">
+              <form  onSubmit={handleSubmit}className="space-y-4">
                 <input
                   type="text"
                   placeholder="Your Name"
+                  value={form.name}
+                  onChange={(e)=> setForm({...form, name:e.target.value})}
                   className="w-full p-3 rounded-lg bg-slate-800/90 border border-slate-600 focus:border-red-500 outline-none text-sm sm:text-base"
                 />
 
                 <input
                   type="email"
                   placeholder="Your Email"
+                  value={form.email}
+                  onChange={(e)=> setForm({...form, email:e.target.value})}
                   className="w-full p-3 rounded-lg bg-slate-800/90 border border-slate-600 focus:border-red-500 outline-none text-sm sm:text-base"
                 />
 
                 <textarea
                   rows="4"
                   placeholder="Your Message"
+                  value={form.message}
+                  onChange={(e)=> setForm({...form, message:e.target.value})}
                   className="w-full p-3 rounded-lg bg-slate-800/90 border border-slate-600 focus:border-red-500 outline-none text-sm sm:text-base resize-none"
                 ></textarea>
 
                 <button
-                  type="button"
+                  type="submit"
                   className="w-full bg-gradient-to-r from-red-500 to-pink-600 hover:scale-[1.02] transition duration-300 py-3 rounded-lg font-semibold shadow-lg text-sm sm:text-base"
                 >
                   Send Message

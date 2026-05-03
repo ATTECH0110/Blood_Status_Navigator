@@ -90,7 +90,7 @@ export default function Footer() {
                     href="mailto:support@bloodstatus.com"
                     className="hover:text-red-400 transition break-all"
                   >
-                    support@bloodstatus.com
+                    cs786123@gmail.com
                   </a>
                 </div>
               </li>

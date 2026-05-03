@@ -8,7 +8,8 @@ import Contact from "./pages/Contact";
 import Navbar from "./components/Navbar";
 import Hospitals from "./pages/Hospitals";
 import Footer from "./components/Footer";
-import Chatbot from "../src/components/Chatbot.jsx"
+import Chatbot from "./components/Chatbot";
+
 
 export default function App() {
   const isAdmin = !!localStorage.getItem("token");
@@ -23,6 +24,7 @@ export default function App() {
     <div className="min-h-screen flex flex-col bg-slate-950 text-white">
       <Navbar />
       <Chatbot/>
+      
 
       <main className="flex-1">
         <Routes>

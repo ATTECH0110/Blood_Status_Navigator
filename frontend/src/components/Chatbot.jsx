@@ -1,66 +1,98 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function Chatbot() {
   const [open, setOpen] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const location = useLocation();
 
-  const speak = () => {
-    const text =
-      "नमस्ते। आपका Blood status tracker website me स्वागत है ,सबसे पहले नीचे दिए गए Refresh Hospital बटन पर क्लिक करें। उसके बाद मैप पर jo अस्पताल के मार्कर  diya hai uss पर क्लिक करें और ब्लड रिक्वेस्ट बटन दबाएं।";
+  const speechRef = useRef(null); // 🔥 track speech
+
+  // 🔥 FORCE STOP (real fix)
+  const stopVoice = () => {
+    try {
+      if (speechRef.current) {
+        window.speechSynthesis.cancel();
+        speechRef.current = null;
+      }
+
+      window.speechSynthesis.cancel();
+    } catch (e) {}
+  };
+
+  // 🔥 PAGE CHANGE → INSTANT STOP
+  useEffect(() => {
+    stopVoice();
+    setOpen(false);
+  }, [location.pathname]);
+
+  // 🔇 MUTE → INSTANT STOP
+  useEffect(() => {
+    if (isMuted) {
+      stopVoice();
+    }
+  }, [isMuted]);
+
+  // 🔊 SPEAK
+  const speak = (text) => {
+    if (isMuted) return;
+
+    stopVoice(); // 🔥 पहले बंद
 
     const speech = new SpeechSynthesisUtterance(text);
-    speech.lang = "hi-IN"; // ✅ Hindi voice
-    speech.rate = 0.85;
+    speech.lang = "hi-IN";
+    speech.rate = 0.9;
 
-    window.speechSynthesis.cancel();
+    speechRef.current = speech; // 🔥 track
+
     window.speechSynthesis.speak(speech);
   };
 
+  // 🤖 AUTO VOICE
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setOpen(true);
-      speak();
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
+    if (open) {
+      speak(
+        "नमस्ते! इस वेबसाइट में आप नजदीकी ब्लड बैंक खोज सकते हैं। पहले लोकेशन बटन पर क्लिक करें, फिर अस्पताल चुनें और रिक्वेस्ट भेजें।"
+      );
+    }
+  }, [open]);
 
   return (
     <>
-      {/* Button */}
+      {/* Chatbot Button */}
       <button
         onClick={() => setOpen(!open)}
-        className="fixed bottom-5 right-5 bg-blue-600 text-white px-4 py-3 rounded-full shadow-lg z-[9999]"
+        className="fixed bottom-5 right-5 bg-red-600 text-white px-4 py-3 rounded-full z-[9999]"
       >
         💬
       </button>
 
-      {/* Chatbox */}
+      {/* Mute Button */}
+      <button
+        onClick={() => setIsMuted((prev) => !prev)}
+        className="fixed bottom-20 right-5 bg-slate-800 text-white px-4 py-3 rounded-full z-[9999]"
+      >
+        {isMuted ? "🔇" : "🔊"}
+      </button>
+
+      {/* Chat UI */}
       {open && (
-        <div className="fixed bottom-20 right-5 w-72 bg-white text-black rounded-2xl shadow-2xl p-4 z-[9999] border">
-          
-          <h3 className="font-bold text-lg mb-2 text-blue-600">
-            🤖 सहायता
-          </h3>
-
-          <div className="text-sm space-y-2">
-            {/* <p>👉 📍 लोकेशन बटन पर क्लिक करें</p> */}
-            <p>👉 Refresh Hospital बटन पर क्लिक करें </p>
-            <p>👉 अस्पताल चुनें</p>
-            <p>👉 Request Blood दबाएं</p>
-          </div>
+        <div className="fixed bottom-20 right-5 w-[300px] bg-slate-900 text-white p-4 rounded-xl z-[9999]">
+          <h2 className="font-bold mb-2">Assistant</h2>
+          <p className="text-sm text-gray-300">
+            👉 Map पर hospital marker पर click करें <br />
+            👉 Request Blood button दबाएं
+          </p>
 
           <button
-            onClick={speak}
-            className="mt-3 w-full bg-green-600 text-white py-2 rounded-lg"
+            onClick={() =>
+              speak(
+                "मैप पर ब्लू मार्कर पर क्लिक करें और ब्लड रिक्वेस्ट भेजें"
+              )
+            }
+            className="bg-green-600 w-full py-2 rounded"
           >
-            🔊 फिर से सुनें
-          </button>
-
-          <button
-            onClick={() => setOpen(false)}
-            className="mt-2 w-full bg-red-500 text-white py-2 rounded-lg"
-          >
-            बंद करें
+            🔊 Guide Me
           </button>
         </div>
       )}

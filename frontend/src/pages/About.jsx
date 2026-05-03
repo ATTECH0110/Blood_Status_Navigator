@@ -126,14 +126,14 @@ export default function About() {
               role="Database Engineer"
               img={riteshImg}
               linkedin="https://www.linkedin.com/in/ritesh-kushwaha-a3a369360?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-              instagram="/"
+              instagram="https://www.instagram.com/ritesh_kushwaha7393/"
             />
 
             <TeamCard
               name="Abhinav Singh"
               role="UI/UX Designer"
               img={abhinavImg}
-              linkedin="https://www.linkedin.com/in/abhinav-singh-106853373?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+              linkedin="https://www.linkedin.com/in/abhinav-singh-106853373?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
               instagram=""
             />
 

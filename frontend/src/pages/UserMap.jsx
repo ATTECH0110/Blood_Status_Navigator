@@ -12,8 +12,16 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import axios from "axios";
 import API from "../config";
+import Chatbot from "../components/Chatbot.jsx"
 
 window.L = L;
+
+// ✅ Green user marker
+const userIcon = new L.Icon({
+  iconUrl: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
+  iconSize: [32, 32],
+  iconAnchor: [16, 32],
+});
 
 /* Fix leaflet icon */
 delete L.Icon.Default.prototype._getIconUrl;
@@ -29,6 +37,7 @@ L.Icon.Default.mergeOptions({
 export default function UserMap() {
   const [hospitals, setHospitals] = useState([]);
   const [searchPosition, setSearchPosition] = useState(null);
+  const [userPosition, setUserPosition] = useState(null); // ✅ NEW
   const [selectedHospital, setSelectedHospital] = useState(null);
   const [showToast, setShowToast] = useState(false);
   const [time, setTime] = useState(new Date());
@@ -40,6 +49,51 @@ export default function UserMap() {
     bloodGroup: "",
     units: ""
   });
+//     // speak wala
+//   const speak = (msg) => {
+//   const speech = new SpeechSynthesisUtterance(msg);
+//   speech.lang = "hi-IN";
+//   window.speechSynthesis.cancel();
+//   window.speechSynthesis.speak(speech);
+// };
+
+// // 👇 speak के नीचे add करो
+// const startVoiceSearch = () => {
+//   const SpeechRecognition =
+//     window.SpeechRecognition || window.webkitSpeechRecognition;
+
+//   if (!SpeechRecognition) {
+//     alert("Voice search supported nahi hai browser me");
+//     return;
+//   }
+
+//   const recognition = new SpeechRecognition();
+//   recognition.lang = "hi-IN";
+//   recognition.interimResults = false;
+
+//   recognition.start();
+
+//   recognition.onresult = async (event) => {
+//     const text = event.results[0][0].transcript;
+
+//     speak(`आपने कहा ${text}`);
+
+//     const res = await fetch(
+//       `https://nominatim.openstreetmap.org/search?format=json&q=${text} India`
+//     );
+//     const data = await res.json();
+
+//     if (data.length > 0) {
+//       setSearchPosition([
+//         parseFloat(data[0].lat),
+//         parseFloat(data[0].lon)
+//       ]);
+//       speak("लोकेशन मिल गया");
+//     } else {
+//       speak("लोकेशन नहीं मिला");
+//     }
+//   };
+// };
 
   useEffect(() => {
     const leafletPane = document.querySelector(".leaflet-pane");
@@ -135,6 +189,7 @@ export default function UserMap() {
 
   return (
     <>
+    <Chatbot/>
       {/* Success Toast */}
       {showToast && (
         <div className="fixed top-20 sm:top-24 right-3 sm:right-5 z-[999999] animate-pulse max-w-[90vw]">
@@ -183,7 +238,14 @@ export default function UserMap() {
                 </div>
 
                 <SearchBox setSearchPosition={setSearchPosition} />
-                <CurrentLocation setSearchPosition={setSearchPosition} />
+                {/* <button
+  onClick={startVoiceSearch}
+  className="w-full mt-3 py-3 rounded-2xl bg-purple-600 text-white font-semibold shadow-lg"
+>
+  🎤 Voice Search
+</button> */}
+                <CurrentLocation setSearchPosition={setSearchPosition} 
+                setUserPosition={setUserPosition}/>
 
                 <button
                   onClick={loadHospitals}
@@ -244,7 +306,7 @@ export default function UserMap() {
           <main className="flex-1 relative h-[55vh] sm:h-[60vh] lg:h-[calc(100vh-64px)] min-h-[420px]">
             
             {/* Floating Top Info */}
-            <div className="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-4 z-[1000] pointer-events-none">
+            <div className="absolute top-3 sm:top-2 left-3 sm:left-11 right-3 sm:right-4 z-[1000] pointer-events-none">
               <div className="max-w-full sm:max-w-fit rounded-2xl border border-slate-700 bg-slate-900/80 backdrop-blur-md px-4 sm:px-5 py-3 shadow-2xl pointer-events-auto">
                 <h2 className="text-sm sm:text-lg md:text-xl font-bold text-white">
                   🗺️ Blood Availability Navigator
@@ -263,6 +325,13 @@ export default function UserMap() {
               <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
               {searchPosition && <FlyTo position={searchPosition} />}
+
+              {/* ✅ GREEN USER MARKER */}
+              {userPosition && (
+                <Marker position={userPosition} icon={userIcon}>
+                  <Popup>📍 You are here</Popup>
+                </Marker>
+              )}
 
               {Array.isArray(hospitals) &&
                 hospitals.map((h) =>
@@ -502,16 +571,24 @@ function SearchBox({ setSearchPosition }) {
 }
 
 /* CURRENT LOCATION */
-function CurrentLocation({ setSearchPosition }) {
+function CurrentLocation({ setSearchPosition, setUserPosition }) {
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        setSearchPosition([pos.coords.latitude, pos.coords.longitude]);
+        const lat = pos.coords.latitude;
+        const lon = pos.coords.longitude;
+
+        setSearchPosition([lat, lon]);
+        setUserPosition([lat, lon]); // ✅ ADD
       },
-      () => alert("Location permission denied")
+      () => alert("Location permission denied"),
+      {
+        enableHighAccuracy:true,//better accuracy
+      }
     );
   };
 
+  
   return (
     <button
       onClick={getLocation}
