@@ -590,6 +590,8 @@ function CurrentLocation({ setSearchPosition, setUserPosition }) {
 
   
   return (
+
+    
     <button
       onClick={getLocation}
       className="w-full mt-3 py-3.5 rounded-2xl bg-gradient-to-r from-red-500 to-pink-600 hover:scale-[1.02] active:scale-[0.99] transition font-semibold shadow-lg text-sm sm:text-base"
