@@ -1,5 +1,6 @@
 import contactBg from "../assets/images/contact-bg.jpg";
 import React, {useState} from "react";
+import API from "../config";
 
 export default function Contact() {
 
